@@ -2,61 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My MSc(CS) Textbook Library</title>
+  <title>MSc(CS) Digital Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background: #f4f6f8;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #eef2f7);
       color: #333;
+      line-height: 1.6;
     }
     header {
       background: #2c3e50;
       color: white;
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
     }
-    h1 {
-      margin: 0;
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.85;
     }
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 30px;
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
     .card {
       background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      padding: 25px;
       text-align: center;
-      transition: transform 0.2s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: #2c3e50;
     }
     .card a {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #2c3e50;
+      color: white;
+      border-radius: 8px;
       text-decoration: none;
-      color: #2c3e50;
-      font-weight: bold;
-      font-size: 18px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .card a:hover {
+      background: #1a252f;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 30px;
+    }
+    /* Mobile tweaks */
+    @media(max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      .card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>📚 MSc(CS) Textbook Library</h1>
-    <p>Select a subject to open and read</p>
+    <h1>📚 MSc(CS) Digital Library</h1>
+    <p>Select a subject to explore your textbooks</p>
   </header>
 
   <div class="container">
-    <div class="card"><a href="PPL/">Principles of Programming Language</a></div>
-    <div class="card"><a href="AOS/">Advance Operating System</a></div>
-    <div class="card"><a href="AI/">Artificial Intelligence</a></div>
-    <div class="card"><a href="RM/">Research Methodology</a></div>
-    <div class="card"><a href="ADWT/">Advance Database and Web Technologies</a></div>
+    <div class="card">
+      <h2>Principles of Programming Language</h2>
+      <a href="PPL/">Open Book</a>
+    </div>
+    <div class="card">
+      <h2>Advance Operating System</h2>
+      <a href="AOS/">Open Book</a>
+    </div>
+    <div class="card">
+      <h2>Artificial Intelligence</h2>
+      <a href="AI/">Open Book</a>
+    </div>
+    <div class="card">
+      <h2>Research Methodology</h2>
+      <a href="RM/">Open Book</a>
+    </div>
+    <div class="card">
+      <h2>Advance Database & Web Technologies</h2>
+      <a href="ADWT/">Open Book</a>
+    </div>
   </div>
+
+  <footer>
+    <p>© 2025 MSc(CS) Digital Library | Designed for study use</p>
+  </footer>
 </body>
 </html>
