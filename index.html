@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My MSc(CS) Textbook Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 MSc(CS) Textbook Library</h1>
+    <p>Select a subject to open and read</p>
+  </header>
+
+  <div class="container">
+    <div class="card"><a href="Principles_of_Programming_Language/">Principles of Programming Language</a></div>
+    <div class="card"><a href="Advance_Operating_System/">Advance Operating System</a></div>
+    <div class="card"><a href="Artificial_Intelligence/">Artificial Intelligence</a></div>
+    <div class="card"><a href="Research_Methodology/">Research Methodology</a></div>
+    <div class="card"><a href="Advance_Database_and_Web_Technologies/">Advance Database and Web Technologies</a></div>
+  </div>
+</body>
+</html>
