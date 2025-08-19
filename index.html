@@ -1,248 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>MSc(CS) Digital Library</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg1:#f9f9f9; --bg2:#eef2f7; --ink:#2c3e50; --ink-2:#1a252f; --text:#333;
-      --card:#fff; --shadow:0 6px 15px rgba(0,0,0,.1); --shadow-lg:0 12px 28px rgba(0,0,0,.18);
-      --radius:16px;
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f4f6f9;
+      color: #333;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(135deg,var(--bg1),var(--bg2));
-      color:var(--text); line-height:1.6;
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
     }
-    header{
-      background:var(--ink); color:#fff; padding:32px 20px; text-align:center;
-      position:sticky; top:0; z-index:2;
+    header h1 { margin: 0; font-size: 1.8rem; }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
     }
-    header h1{font-size:2rem; margin-bottom:8px}
-    header p{opacity:.9}
-
-    .container{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:24px; padding:40px 20px; max-width:1200px; margin:auto;
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
+      cursor: pointer;
     }
-    .card{
-      background:var(--card); border-radius:var(--radius); padding:24px; text-align:center;
-      box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;
-      cursor:pointer; border:1px solid rgba(0,0,0,.04);
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { font-size: 1.1rem; margin-bottom: 10px; color: #2c3e50; }
+    iframe {
+      width: 100%;
+      height: 90vh;
+      border: none;
+      display: none;
     }
-    .card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lg) }
-    .card h2{font-size:1.1rem; margin-bottom:10px; color:var(--ink)}
-    .chip{
-      display:inline-block; padding:8px 14px; background:var(--ink); color:#fff; border-radius:10px;
-      text-decoration:none; font-weight:600; transition:background .2s, transform .2s; user-select:none;
-    }
-    .chip:hover{ background:var(--ink-2) }
-    footer{ text-align:center; padding:20px; background:var(--ink); color:#fff; margin-top:30px }
-
-    /* Modal */
-    .modal{
-      position:fixed; inset:0; background:rgba(0,0,0,.7); display:none; align-items:center; justify-content:center;
-      z-index:999;
-    }
-    .modal.open{ display:flex }
-    .modal-card{
-      background:#0b1620; width:96vw; height:92vh; max-width:1400px; border-radius:20px;
-      box-shadow:var(--shadow-lg); overflow:hidden; display:flex; flex-direction:column;
-    }
-    .modal-bar{
-      display:flex; align-items:center; gap:10px; padding:10px; background:#0f2232; color:#fff;
-    }
-    .modal-title{ font-weight:600; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
-    .modal-btn{
-      appearance:none; border:0; border-radius:12px; padding:8px 12px; font-weight:600; cursor:pointer;
-    }
-    .btn-close{ background:#ff4d4f; color:#fff }
-    .btn-newtab{ background:#e6f0ff; color:#0b3a7e }
-    .viewer{
-      position:relative; flex:1; background:#0b1620;
-    }
-    iframe{
-      position:absolute; inset:0; width:100%; height:100%; border:0; background:#0b1620;
-    }
-    .spinner{
-      position:absolute; inset:0; display:grid; place-items:center; color:#cfe2ff; font-weight:600;
-      letter-spacing:.4px;
-    }
-    .spinner:after{
-      content:""; width:44px; height:44px; border-radius:50%; border:4px solid rgba(255,255,255,.25);
-      border-top-color:#fff; animation:spin 1s linear infinite; display:block; margin-bottom:12px;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .banner{
-      max-width:1200px; margin:16px auto 0; padding:0 20px; color:#546e7a; font-size:.95rem;
-    }
-    .banner code{ background:rgba(0,0,0,.06); padding:2px 6px; border-radius:6px }
-    @media(max-width:600px){
-      header h1{font-size:1.6rem}
-      .card{padding:20px}
-      .modal-card{width:98vw;height:90vh;border-radius:16px}
-      .modal-btn{padding:8px 10px}
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>📚 MSc(CS) Digital Library</h1>
-    <p>Select a subject to open the Drive PDF preview (view-only iframe)</p>
+    <p>View your subject textbooks (no download option)</p>
   </header>
 
-  <div class="banner">
-    <!-- Tip for share settings -->
-    <p><strong>Tip:</strong> For stricter “view-only”, in Drive’s file <em>Share</em> &rarr; <em>Settings</em>, uncheck
-      <em>“Viewers and commenters can see the option to download, print, and copy”</em>.
-      This, plus the embedded preview below, discourages downloads.</p>
-  </div>
-
-  <div class="container" id="grid">
-    <!-- Cards will be generated by JS from the mapping below -->
-  </div>
-
-  <footer>
-    <p>© 2025 MSc(CS) Digital Library | Designed for study use</p>
-  </footer>
-
-  <!-- Modal Viewer -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mtitle">
-      <div class="modal-bar">
-        <div class="modal-title" id="mtitle">Loading…</div>
-        <button class="modal-btn btn-newtab" id="openNewTab" title="Open in new tab">Open in new tab</button>
-        <button class="modal-btn btn-close" id="closeModal" title="Close (Esc)">Close</button>
-      </div>
-      <div class="viewer">
-        <div class="spinner" id="spinner">
-          <div style="display:grid;place-items:center;gap:10px;">
-            <div></div>
-            <div>Preparing preview…</div>
-          </div>
-        </div>
-        <iframe id="driveFrame" allow="fullscreen" referrerpolicy="no-referrer"></iframe>
-      </div>
+  <div class="container">
+    <div class="card" onclick="openBook('PPL')">
+      <h2>Principles of Programming Language</h2>
+    </div>
+    <div class="card" onclick="openBook('AOS')">
+      <h2>Advance Operating System</h2>
+    </div>
+    <div class="card" onclick="openBook('AI')">
+      <h2>Artificial Intelligence</h2>
+    </div>
+    <div class="card" onclick="openBook('RM')">
+      <h2>Research Methodology</h2>
+    </div>
+    <div class="card" onclick="openBook('ADWT')">
+      <h2>Advance Database & Web Technologies</h2>
     </div>
   </div>
 
+  <!-- Preview Section -->
+  <iframe id="viewer"></iframe>
+
+  <footer>
+    <p>© 2025 MSc(CS) Digital Library | View-only Mode</p>
+  </footer>
+
   <script>
-    /**
-     * 1) Put your Google Drive FILE IDs here.
-     *    Only replace the values (the strings on the right). Keep the keys as-is.
-     */
     const DRIVE_FILES = {
-      "Principles of Programming Language": "FILE_ID_HERE", // e.g. 1-c_E16qpOOSRCPkFlzQyZCGpooUSXxIg
-      "Advance Operating System":           "FILE_ID_HERE",
-      "Artificial Intelligence":            "FILE_ID_HERE",
-      "Research Methodology":               "FILE_ID_HERE",
-      "Advance Database & Web Technologies":"1-c_E16qpOOSRCPkFlzQyZCGpooUSXxIg",
+      PPL: "FILE_ID_HERE",
+      AOS: "FILE_ID_HERE",
+      AI: "FILE_ID_HERE",
+      RM: "FILE_ID_HERE",
+      ADWT: "1-c_E16qpOOSRCPkFlzQyZCGpooUSXxIg"
     };
 
-    /**
-     * 2) (Optional) Slug map for deep-linking via URL hash, e.g. #AI
-     */
-    const SLUGS = {
-      "Principles of Programming Language": "PPL",
-      "Advance Operating System": "AOS",
-      "Artificial Intelligence": "AI",
-      "Research Methodology": "RM",
-      "Advance Database & Web Technologies": "ADWT"
-    };
-
-    // --- UI wiring ---
-    const grid = document.getElementById("grid");
-    const modal = document.getElementById("modal");
-    const frame = document.getElementById("driveFrame");
-    const spinner = document.getElementById("spinner");
-    const titleEl = document.getElementById("mtitle");
-    const closeBtn = document.getElementById("closeModal");
-    const newTabBtn = document.getElementById("openNewTab");
-
-    // Generate cards
-    Object.keys(DRIVE_FILES).forEach(subject => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.setAttribute("role","button");
-      card.setAttribute("tabindex","0");
-      card.dataset.subject = subject;
-
-      const h2 = document.createElement("h2");
-      h2.textContent = subject;
-
-      const a = document.createElement("span");
-      a.className = "chip";
-      a.textContent = "Open Preview";
-
-      card.appendChild(h2);
-      card.appendChild(a);
-      grid.appendChild(card);
-
-      const open = () => openPreview(subject);
-      card.addEventListener("click", open);
-      card.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
-      });
-    });
-
-    function buildPreviewURL(fileId){
-      // Drive preview endpoint; adding rm=minimal to reduce UI chrome a bit
-      return `https://drive.google.com/file/d/${fileId}/preview?rm=minimal`;
+    function openBook(code) {
+      const fileId = DRIVE_FILES[code];
+      const iframe = document.getElementById("viewer");
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview?rm=minimal`;
+      iframe.style.display = "block";
+      window.scrollTo({ top: iframe.offsetTop - 20, behavior: "smooth" });
     }
-
-    function openPreview(subject){
-      const fileId = DRIVE_FILES[subject];
-      if(!fileId || fileId === "FILE_ID_HERE"){
-        alert(`No Drive file ID configured for:\n\n${subject}\n\nPlease set it in the script.`);
-        return;
-      }
-      const url = buildPreviewURL(fileId);
-
-      titleEl.textContent = subject;
-      spinner.style.display = "grid";
-      frame.src = "about:blank"; // reset first to force load event each time
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-
-      // Slight delay before assigning src for smoother spinner
-      setTimeout(()=>{ frame.src = url; }, 50);
-
-      newTabBtn.onclick = () => window.open(url, "_blank", "noopener,noreferrer");
-
-      // Update hash for deep-linking
-      const slug = SLUGS[subject] || encodeURIComponent(subject.replace(/\s+/g,'-'));
-      history.replaceState(null, "", `#${slug}`);
-    }
-
-    function closePreview(){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden","true");
-      frame.src = "about:blank";
-      spinner.style.display = "grid";
-      // Clear hash
-      history.replaceState(null, "", location.pathname + location.search);
-    }
-
-    closeBtn.addEventListener("click", closePreview);
-    modal.addEventListener("click", (e)=>{ if(e.target === modal) closePreview(); });
-    document.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && modal.classList.contains("open")) closePreview(); });
-
-    frame.addEventListener("load", ()=>{ spinner.style.display = "none"; });
-
-    // Deep-link handler: open modal if hash matches a subject slug
-    function tryOpenFromHash(){
-      const hash = (location.hash || "").replace(/^#/, "");
-      if(!hash) return;
-      const subject = Object.keys(SLUGS).find(k => SLUGS[k].toLowerCase() === hash.toLowerCase());
-      if(subject){ openPreview(subject); }
-    }
-    window.addEventListener("hashchange", tryOpenFromHash);
-    tryOpenFromHash();
   </script>
 </body>
 </html>
