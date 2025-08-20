@@ -58,7 +58,7 @@
       font-weight: 600;
       color: #2c3e50;
     }
-    /* Different accent colors for each subject */
+    /* Accent colors */
     .card:nth-child(1) { background: rgba(236, 240, 241, 0.85); }
     .card:nth-child(2) { background: rgba(231, 245, 255, 0.85); }
     .card:nth-child(3) { background: rgba(232, 246, 239, 0.85); }
@@ -73,11 +73,29 @@
       overflow: hidden;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       animation: fadeIn 0.6s ease;
+      background: white;
+      padding-bottom: 15px;
     }
     iframe {
       width: 100%;
       height: 85vh;
       border: none;
+    }
+    .drive-btn {
+      display: inline-block;
+      margin: 15px auto 0;
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .drive-btn:hover {
+      background: linear-gradient(90deg, #4ca1af, #2c3e50);
+      transform: translateY(-3px);
     }
 
     footer {
@@ -123,6 +141,9 @@
   <!-- Preview Section -->
   <div class="viewer-container" id="viewerBox">
     <iframe id="viewer"></iframe>
+    <div style="text-align:center;">
+      <a id="driveLink" class="drive-btn" target="_blank">📖 Open in Google Drive</a>
+    </div>
   </div>
 
   <footer>
@@ -142,7 +163,11 @@
       const fileId = DRIVE_FILES[code];
       const iframe = document.getElementById("viewer");
       const viewerBox = document.getElementById("viewerBox");
-      iframe.src = `https://drive.google.com/file/d/${fileId}/view?usp=drive_link`;
+      const driveLink = document.getElementById("driveLink");
+
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+      driveLink.href = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+
       viewerBox.style.display = "block";
       window.scrollTo({ top: viewerBox.offsetTop - 20, behavior: "smooth" });
     }
