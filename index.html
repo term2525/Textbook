@@ -3,61 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <title>MSc(CS) Digital Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
       text-align: center;
-      margin: 0;
-      padding: 0;
     }
-    h1 {
-      background: #333;
-      color: white;
-      padding: 15px;
-      margin: 0;
+    header h1 { margin: 0; font-size: 1.8rem; }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
     }
-    .book-list {
-      margin: 20px;
-    }
-    button {
-      display: block;
-      margin: 10px auto;
-      padding: 12px 18px;
-      font-size: 16px;
-      border: none;
-      background: #444;
-      color: white;
-      border-radius: 6px;
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
       cursor: pointer;
     }
-    button:hover {
-      background: #666;
-    }
-    #viewer {
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { font-size: 1.1rem; margin-bottom: 10px; color: #2c3e50; }
+    iframe {
       width: 100%;
       height: 90vh;
       border: none;
       display: none;
-      margin-top: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>📚 MSc(CS) Digital Library</h1>
+    <p>View your subject textbooks (download disabled in Drive)</p>
+  </header>
 
-  <h1>MSc(CS) Digital Library</h1>
-
-  <div class="book-list">
-    <button onclick="openBook('PPL')">PPL</button>
-    <button onclick="openBook('AOS')">AOS</button>
-    <button onclick="openBook('AI')">AI</button>
-    <button onclick="openBook('RM')">RM</button>
-    <button onclick="openBook('ADWT')">ADWT</button>
+  <div class="container">
+    <div class="card" onclick="openBook('PPL')">
+      <h2>Principles of Programming Language</h2>
+    </div>
+    <div class="card" onclick="openBook('AOS')">
+      <h2>Advance Operating System</h2>
+    </div>
+    <div class="card" onclick="openBook('AI')">
+      <h2>Artificial Intelligence</h2>
+    </div>
+    <div class="card" onclick="openBook('RM')">
+      <h2>Research Methodology</h2>
+    </div>
+    <div class="card" onclick="openBook('ADWT')">
+      <h2>Advance Database & Web Technologies</h2>
+    </div>
   </div>
 
+  <!-- Preview Section -->
   <iframe id="viewer"></iframe>
 
+  <footer>
+    <p>© 2025 MSc(CS) Digital Library | View-only Mode</p>
+  </footer>
+
   <script>
-    // Google Drive File IDs
+    // Mapping of subject codes to Google Drive file IDs
     const DRIVE_FILES = {
       PPL: "1J-IJgyi-XzDivkmVVVkV-ZkMueqBCFXe",
       AOS: "1ZePvJUxIwtHhk6H2rrW8QCmy6ni-6rYf",
@@ -69,15 +96,10 @@
     function openBook(code) {
       const fileId = DRIVE_FILES[code];
       const iframe = document.getElementById("viewer");
-
-      // PDF.js Viewer with raw Google Drive file
-      iframe.src =
-        `https://mozilla.github.io/pdf.js/web/viewer.html?file=https://drive.google.com/uc?export=download&id=${fileId}`;
-
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
       iframe.style.display = "block";
       window.scrollTo({ top: iframe.offsetTop - 20, behavior: "smooth" });
     }
   </script>
-
 </body>
 </html>
