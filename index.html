@@ -97,7 +97,7 @@
     function openBook(code) {
       const fileId = DRIVE_FILES[code];
       const iframe = document.getElementById("viewer");
-      iframe.src = `https://drive.google.com/file/d/${fileId}`;
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
       iframe.style.display = "block";
       window.scrollTo({ top: iframe.offsetTop - 20, behavior: "smooth" });
     }
