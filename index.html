@@ -4,58 +4,102 @@
   <meta charset="UTF-8">
   <title>MSc(CS) Digital Library</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #eef2f3, #d9e4f5);
       color: #333;
     }
     header {
-      background: #2c3e50;
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
       color: white;
-      padding: 20px;
+      padding: 25px;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    header h1 { margin: 0; font-size: 1.8rem; }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    header p { margin: 5px 0 0; font-size: 1rem; opacity: 0.9; }
+
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      padding: 20px;
-      max-width: 1100px;
+      padding: 30px;
+      max-width: 1200px;
       margin: auto;
     }
     .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 25px;
       text-align: center;
-      transition: transform 0.2s;
       cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
-    .card:hover { transform: translateY(-5px); }
-    .card h2 { font-size: 1.1rem; margin-bottom: 10px; color: #2c3e50; }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+      border-color: #4ca1af;
+    }
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    /* Different accent colors for each subject */
+    .card:nth-child(1) { background: rgba(236, 240, 241, 0.85); }
+    .card:nth-child(2) { background: rgba(231, 245, 255, 0.85); }
+    .card:nth-child(3) { background: rgba(232, 246, 239, 0.85); }
+    .card:nth-child(4) { background: rgba(252, 243, 232, 0.85); }
+    .card:nth-child(5) { background: rgba(241, 232, 252, 0.85); }
+
+    .viewer-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      animation: fadeIn 0.6s ease;
+    }
     iframe {
       width: 100%;
-      height: 90vh;
+      height: 85vh;
       border: none;
-      display: none;
     }
+
     footer {
       text-align: center;
-      padding: 15px;
-      background: #2c3e50;
+      padding: 20px;
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
       color: white;
-      margin-top: 30px;
+      margin-top: 40px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+    }
+    footer p { margin: 0; font-size: 0.9rem; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>📚 MSc(CS) Digital Library</h1>
-    <p>View your subject textbooks (download disabled in Drive)</p>
+    <p>Access your subject textbooks in view-only mode</p>
   </header>
 
   <div class="container">
@@ -77,14 +121,15 @@
   </div>
 
   <!-- Preview Section -->
-  <iframe id="viewer"></iframe>
+  <div class="viewer-container" id="viewerBox">
+    <iframe id="viewer"></iframe>
+  </div>
 
   <footer>
-    <p>© 2025 MSc(CS) Digital Library | View-only Mode</p>
+    <p>© 2025 MSc(CS) Digital Library | Designed with ❤️</p>
   </footer>
 
   <script>
-    // Mapping of subject codes to Google Drive file IDs
     const DRIVE_FILES = {
       PPL: "1J-IJgyi-XzDivkmVVVkV-ZkMueqBCFXe",
       AOS: "1ZePvJUxIwtHhk6H2rrW8QCmy6ni-6rYf",
@@ -96,9 +141,10 @@
     function openBook(code) {
       const fileId = DRIVE_FILES[code];
       const iframe = document.getElementById("viewer");
+      const viewerBox = document.getElementById("viewerBox");
       iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
-      iframe.style.display = "block";
-      window.scrollTo({ top: iframe.offsetTop - 20, behavior: "smooth" });
+      viewerBox.style.display = "block";
+      window.scrollTo({ top: viewerBox.offsetTop - 20, behavior: "smooth" });
     }
   </script>
 </body>
